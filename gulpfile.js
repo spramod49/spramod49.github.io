@@ -6,6 +6,7 @@ var cleanCSS = require('gulp-clean-css');
 var rename = require("gulp-rename");
 var uglify = require('gulp-uglify');
 var pkg = require('./package.json');
+var htmlmin = require('gulp-htmlmin')
 
 // Set the banner content
 var banner = ['/*!\n',
@@ -103,8 +104,14 @@ gulp.task('browserSync', function() {
   })
 })
 
+gulp.task('minify-html', function() {
+  return gulp.src('./index.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('./'));
+});
+
 // Dev task with browserSync
-gulp.task('dev', ['browserSync', 'sass', 'minify-css', 'minify-js'], function() {
+gulp.task('dev', ['browserSync', 'sass', 'minify-css', 'minify-js','minify-html'], function() {
   gulp.watch('scss/*.scss', ['sass']);
   gulp.watch('css/*.css', ['minify-css']);
   gulp.watch('js/*.js', ['minify-js']);
