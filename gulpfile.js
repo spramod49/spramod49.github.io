@@ -105,7 +105,7 @@ gulp.task('browserSync', function() {
 })
 
 gulp.task('minify-html', function() {
-  return gulp.src('./index.html')
+  return gulp.src('./index.max..html')
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('./'));
 });
